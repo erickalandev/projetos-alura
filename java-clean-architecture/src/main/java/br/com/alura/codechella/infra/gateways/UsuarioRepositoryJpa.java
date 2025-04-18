@@ -1,6 +1,7 @@
 package br.com.alura.codechella.infra.gateways;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.com.alura.codechella.application.gateways.RepositorioUsuario;
 import br.com.alura.codechella.domain.entities.Usuario;
@@ -25,7 +26,10 @@ public class UsuarioRepositoryJpa implements RepositorioUsuario {
 
     @Override
     public List<Usuario> listarTodos() {
-        return null;//this.repository.findAll();
+        return this.repository.findAll()
+                              .stream()
+                              .map(mapper :: toUsuario)
+                              .collect(Collectors.toList());
     }
     
 }
